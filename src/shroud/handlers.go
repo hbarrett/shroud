@@ -28,12 +28,12 @@ func Post(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(secret)
 	fmt.Println(numViews)
 	fmt.Println(expireDate)
-	token, err := GenerateRandomStr(128)
+	token, err := GenerateRandomStr(64)
 	key := "owejf)oiejl;zjsdfo*QS#sJ"
 	encryptedSecret := EncryptString(key, secret)
 	bar := DecryptString(key, "LdlcbF4lRPU=")
 	fmt.Println(bar)
-	values := encryptedSecret + "," + token + "," + expireDate + "," + numViews
+	values := "'" + encryptedSecret + "','" + token + "','" + expireDate + "','" + numViews + "'"
 	insert := "INSERT INTO secrets (secret, token, date, views) VALUES(" + values + ");"
 
 	_, err = db.Query(insert)

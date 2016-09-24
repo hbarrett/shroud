@@ -81,12 +81,13 @@ func main() {
 	//      fmt.Println(slicehasdb)
 	if slicehastable == false {
 		log.Println("Table secrets does not exist....creating it.")
-		createtable := "CREATE TABLE secrets (secret VARCHAR(40), token VARCHAR(128), date DATE, views TINYINT(2));"
+		createtable := "CREATE TABLE secrets (secret VARCHAR(1000), token VARCHAR(128), date DATE, views TINYINT(2));"
 		rows, err = db.Query(createtable)
 		if err != nil {
 			log.Fatal(err)
 		}
 	}
+
 
 	f, err := os.OpenFile(LogFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
