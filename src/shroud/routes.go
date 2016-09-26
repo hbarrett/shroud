@@ -47,5 +47,12 @@ var routes = Routes{
                 "/post",
                 Post,
         },
+                Route{
+                "Secret",
+                "GET",
+                "/secret",
+                Secret,
+        },
+
 }
 
