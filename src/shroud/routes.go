@@ -42,16 +42,16 @@ var routes = Routes{
                 Version,
         },
 	        Route{
-                "Post",
+                "PutSecret",
                 "POST",
-                "/post",
-                Post,
+                "/putsecret",
+                PutSecretWeb,
         },
                 Route{
-                "Secret",
+                "GetSecret",
                 "GET",
-                "/secret",
-                Secret,
+                "/getsecret",
+                GetSecretWeb,
         },
 
 }

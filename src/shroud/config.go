@@ -18,6 +18,7 @@ type Config struct {
 	DBUsername string
 	DBPassword string
 	DBName     string
+	Key	   string
 }
 
 // Reads info from config file
