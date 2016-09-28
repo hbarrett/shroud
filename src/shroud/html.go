@@ -1076,11 +1076,12 @@ body {
 		<h1><a>Create a secret</a></h1>
 					<div class="form_description">
 			<h2>Your password is "<span style="background-color: #99ccff;">{{.PASS}}</span>"</h2>
+			<h4>This password will be removed after {{.DELVIEWS}} more views or midnight on {{.DELDATE}}, wichever comes first, so please save it in a safe place.</h4>
+
 			<p></p>
 		</div>						
 			<ul>
 			
-		<label>Please keep your password in a safe place</label>
 		<div>
           
          					

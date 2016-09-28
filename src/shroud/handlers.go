@@ -33,11 +33,13 @@ func Version(w http.ResponseWriter, r *http.Request) {
 func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 	key := []byte(keyStr)
 	token := r.FormValue("token")
-	decodedsecret := GetSecret(token, key)
+	decodedsecret, deldate, delviews := GetSecret(token, key)
 	type secretdict struct {
 		PASS string
+		DELDATE string
+		DELVIEWS string
 	}
-	params := &secretdict{PASS: decodedsecret}
+	params := &secretdict{PASS: decodedsecret, DELDATE: deldate, DELVIEWS: delviews}
 	t := template.New("Secret HTML")
 	t, err := t.Parse(SecretHTML)
 	if err != nil {
@@ -51,10 +53,8 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 }
 
 func PutSecretWeb(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(keyStr)
 	key := []byte(keyStr)
 	expireDate := r.FormValue("date")
-	fmt.Println(expireDate)
 	numViews := r.FormValue("views")
 	secret := r.FormValue("secret")
 	token, err := makeRandomString(40)
@@ -65,10 +65,12 @@ func PutSecretWeb(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf(ciphertext)
+//	fmt.Printf(ciphertext)
 
 	insertComplete := PutSecret(ciphertext, token, expireDate, numViews)
-	fmt.Println(insertComplete)
+	if insertComplete == false {
+		log.Println("bad insert using ciphertext" + "," + expireDate + "," + numViews)
+	}
 	URLString := "https://" + r.Host + "/getsecret?token=" + token
 	type urldict struct {
 		URL     string
@@ -142,29 +144,27 @@ func PutSecret(encryptedSecret string, token string, expireDate string, numViews
 	return sucess
 }
 
-func GetSecret(token string, key []byte) string {
+func GetSecret(token string, key []byte) (secret2, date, views string) {
 	var secret string
-	selectstatement := "SELECT secret from secrets where token ='" + token + "';"
-	fmt.Println(selectstatement)
+	selectstatement := "SELECT secret, date, views from secrets where token ='" + token + "';"
 	foundsecret, err := db.Query(selectstatement)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for foundsecret.Next() {
-		err = foundsecret.Scan(&secret)
+		err = foundsecret.Scan(&secret, &date, &views)
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(secret)
 
 	}
-	secret2, err := decryptstring(key, secret)
+	secret2, err = decryptstring(key, secret)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return secret2
+	return
 }
 
 func encryptstring(key []byte, plaintext string) (string, error) {
