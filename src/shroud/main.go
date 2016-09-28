@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 var VERSION string
@@ -27,9 +28,6 @@ func main() {
 	//var LogFile string
 	LogFile := configf.LogDir + "shroud.log"
 
-	//sql
-	//configf.DBHost
-	//configf.DBPort
 	dbslice := []string{}
 	var err error
 	dbuser := configf.DBUsername
@@ -97,6 +95,14 @@ func main() {
 
 	log.SetOutput(f)
 
+	ticker := time.NewTicker(time.Hour * 1)
+	go func() {
+		for t := range ticker.C {
+			cleanup()
+			_ = t
+		}
+	}()
+
 	listensocket := configf.IP + ":" + configf.Port
 	router := NewRouter()
 	log.Println("shroud running on " + listensocket)
@@ -131,4 +137,25 @@ func contains(s []string, e string) bool {
 		}
 	}
 	return false
+}
+
+func cleanup() {
+
+	t := time.Now()
+	t.Format(time.RFC3339)
+	t0 := t.Format("2006-01-02")
+	stmt, err := db.Prepare("DELETE FROM secrets WHERE date < ?")
+	logErr(err)
+	result, err := stmt.Exec(t0)
+	logErr(err)
+	affect, err := result.RowsAffected()
+	logErr(err)
+	log.Println(affect)
+
+}
+
+func logErr(err error) {
+	if err != nil {
+		log.Println(err)
+	}
 }
