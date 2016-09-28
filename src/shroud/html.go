@@ -3,7 +3,7 @@ package main
 const getSecretTmpl string =`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-<title>Create a secret!</title>
+<title>Create a Password with Shroud</title>
 <style rel="stylesheet" type="text/css" media="all" data-href="http://www.phpform.org/formbuilder/colors/color2/view.css">body
 {
 	background:#336699;
@@ -878,8 +878,11 @@ font-weight: bold;
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   
   <script>
-  $.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' });
-  $(document).ready(function() { $("#datepicker").datepicker();});
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  $.datepicker.setDefaults({ dateFormat: 'yy-mm-dd', minDate: +2, maxDate: "+1W" });
+  $(document).ready(function() { $("#datepicker").datepicker();$("#datepicker").datepicker("setDate", new Date());});
   </script>
 
 </head>
@@ -888,45 +891,44 @@ font-weight: bold;
 	<img id="top" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAwIAAAAKCAYAAAAHB+lIAAAABGdBTUEAANbY1E9YMgAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAEzSURBVHja7NvrbsIwDAbQpBT2/q87xrIVtZPrXrQhlU3aOZJJIOW/Pxxqa60AAAD/Sz+81Fr3nqkPngEAAMdqj5wNw4D+G819XdlXgQAAAP5MAGg/DQb9RkO/tsbaCwUAAMDzwkBcY9V0Ft/PgsBe89+ldSsUAAAAzw0Bsd7TmkPAVxjYmwjE5n+oU9jnUCAMAADA74SA2PwPdRt78xwKNicCJYWALoWAPoWBriwnBAAAwPFBoKXmP4eAGAZKmU8IVoNAvg50CiHgnALBqSynAwAAwPFBIP7afxvrLQSAKQxMz9ewnwWBfMUnTgLOK5UnBNN3AACAY+UQMAWA61g1Nf75D8T3z9cmAvk60ND4Xz7rZVwvZT4hiGHAVAAAAI7TynIScB3DwOvYm2+FgKnuPgQYAGd6YIIkTAoCAAAAAElFTkSuQmCC" alt="">
 	<div id="form_container">
 	
-		<h1><a>Create a secret</a></h1>
+		<h1><a>Create a new password to share.</a></h1>
 		<form id="form_1158694" class="appnitro" method="post" action="/putsecret">
 					<div class="form_description">
-			<h2>Create a secret</h2>
+			<h2>Create a new password to share</h2>
 			<p></p>
-		</div>						
+		</div>
 			<ul>
-			
+
 					<li id="li_1">
-		<label class="description" for="secret">Secret </label>
+		<label class="description" for="secret">Password</label>
 		<div>
 			<input id="secret" name="secret" class="element text medium" type="text" maxlength="255" value=""></input>
-		</div> 
+		</div>
+
 		</li>		<li id="li_3">
 		<label class="description" for="views">Number of views before secret is removed:</label>
 		<div>
-		<select class="element select medium" id="views" name="views"> 
-			<option value="" selected="selected"></option>
-<option value="10">10</option>
-<option value="9">9</option>
-<option value="8">8</option>
-<option value="7">7</option>
-<option value="6">6</option>
-<option value="5">5</option>
-<option value="4">4</option>
-<option value="3">3</option>
-<option value="2">2</option>
-<option value="1">1</option>
-
+		<select class="element select medium" id="views" name="views">
+			<!--<option value=5 selected="selected"></option>-->
+			<option value="10">10</option>
+			<option value="9">9</option>
+			<option value="8">8</option>
+			<option value="7">7</option>
+			<option value="6">6</option>
+			<option value="5">5</option>
+			<option value="4">4</option>
+			<option value="3">3</option>
+			<option value="2">2</option>
+			<option value="1">1</option>
 		</select>
-		</div> 
+		</div>
 		</li>		<li id="li_2">
-		<label class="description" for="element_2">Date when secret will be removed:</label>
-		<form>
+
+                <label class="description" for="element_2">Date when secret will be removed:</label>
                 <input id="datepicker" name="date"/>
+
 		</form>
-		 
 		</li>
-			
 					<li class="buttons">
 			    <!--<input type="hidden" name="form_id" value="1158694">--></input>
 
@@ -938,7 +940,16 @@ font-weight: bold;
 		</div>
 	</div>
 	<img id="bottom" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAwIAAAAKCAYAAAAHB+lIAAAABGdBTUEAANbY1E9YMgAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFBSURBVHja7N1RT4MwGAXQMuv8/z9XGVRI2uSzlmU+DE08J7kBBnzPvRtkUyklTZuU0p7LlpeavOW15rrlrW6v4Vy79lLv3wMAADxHqVm3LDXzltuWj5r3up3DuXbtfl/Z5cHgtS7ol8Hifq2DclcCLvW8IgAAAM8tAm1dHsvArWauJeAWCkC7tsRBuRs4KgOxeSyhAMQSMCkCAABwWhEogzIQC8GoBMSkfDC8De6Pl0EB8GsAAACcXwbWO4VgVAK+yHeGpq41tOGxBMQAAADnlYF+rT5KOSoDuRs2hf32eFDpjvsXg2MJUAgAAOC5BaDfL4MFf/840Lf78wPDp7A9eolYCQAAgPPLQOoW+2VQAMpoyNGjQdNBc/DtPwAA/N1i8Mj+sAike63h4HOFAAAAfrcA/Pj8tP+hGAAA8L98CjAAlCWZhVgMBgwAAAAASUVORK5CYII=" alt=""></img>
+<script>
+var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_)(*&^%$#@!';
+var stringLength = Math.floor(Math.random() * 16) + 8 ;
 
+var randomString = Array.apply(null, new Array(stringLength)).map(function () {
+    return possible[Math.floor(Math.random() * possible.length)];
+}).join('');
+
+document.getElementById('secret').value = randomString;
+</script>
 </body></html>
 `
 
