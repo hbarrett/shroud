@@ -17,15 +17,13 @@ var CODENAME string
 var db *sql.DB
 var keyStr string
 
-
-
 func main() {
 	VERSION = "0.0"
 	CODENAME = "peek"
 
 	var configf = ReadConfig() //this is in config.go
 	keyStr = configf.Key
-	fmt.Println(keyStr)
+
 	//var LogFile string
 	LogFile := configf.LogDir + "shroud.log"
 
@@ -90,7 +88,6 @@ func main() {
 			log.Fatal(err)
 		}
 	}
-
 
 	f, err := os.OpenFile(LogFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {

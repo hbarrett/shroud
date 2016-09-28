@@ -13,7 +13,6 @@ import (
 	"net/http"
 )
 
-
 func Index(w http.ResponseWriter, r *http.Request) {
 	placeholder := `Placeholder{}`
 	t := template.New("test")
@@ -40,12 +39,12 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 	}
 	params := &secretdict{PASS: decodedsecret}
 	t := template.New("Secret HTML")
-	t, errr := t.Parse(SecretHTML)
-	if errr != nil {
+	t, err := t.Parse(SecretHTML)
+	if err != nil {
 		fmt.Println("error parsing SecretURL")
-		fmt.Println(errr)
+		fmt.Println(err)
 	}
-	err := t.Execute(w, params)
+	err = t.Execute(w, params)
 	if err != nil {
 		fmt.Println("error with execute")
 	}
@@ -78,11 +77,11 @@ func PutSecretWeb(w http.ResponseWriter, r *http.Request) {
 	}
 	params := &urldict{URL: URLString, EXPDATE: expireDate, VIEWS: numViews}
 	t := template.New("Secret URL")
-	t, errr := t.Parse(SecretURL)
+	t, err = t.Parse(SecretURL)
 
-	if errr != nil {
+	if err != nil {
 		fmt.Println("error parsing SecretURL")
-		fmt.Println(errr)
+		fmt.Println(err)
 	}
 	err = t.Execute(w, params)
 	if err != nil {
