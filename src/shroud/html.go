@@ -97,7 +97,7 @@ const getSecretTmpl string =`<!DOCTYPE html>
             <h1>
                 <a>Create a new password to share.</a>
             </h1>
-            <form id="form_1158694" class="appnitro" method="post" action="/putsecret">
+            <form id="form_1158694" class="appnitro" method="post" action="{{.PATH}}">
                 <div class="form_description">
                     <h2>Create a new password to share</h2>
                     <p></p>

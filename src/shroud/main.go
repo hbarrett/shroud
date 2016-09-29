@@ -20,6 +20,7 @@ var keyStr string
 var background string
 var foreground string
 var formbackground string
+var altpath string
 func main() {
 	VERSION = "0.0"
 	CODENAME = "peek"
@@ -29,6 +30,7 @@ func main() {
 	background = configf.Background
 	foreground = configf.Foreground
 	formbackground = configf.FormBackground
+	altpath = configf.AltPath
 	//var LogFile string
 	LogFile := configf.LogDir + "shroud.log"
 

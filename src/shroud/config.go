@@ -21,6 +21,7 @@ type Config struct {
 	Foreground string
 	Background string
 	FormBackground string
+	AltPath string
 }
 
 // Reads info from config file

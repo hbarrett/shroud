@@ -15,14 +15,17 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	//params := `Placeholder{}`
+
         type secretdict struct {
                 BACKGROUND string
                 FOREGROUND string
 		FORMBACKGROUND string
+	 	PATH string
         }
-        params := &secretdict{BACKGROUND: background, FOREGROUND: foreground, FORMBACKGROUND: formbackground}
+        path := altpath + "/putsecret"
 
+//	path :=  "/putsecret"
+        params := &secretdict{BACKGROUND: background, FOREGROUND: foreground, FORMBACKGROUND: formbackground, PATH: path}
 	t := template.New("test")
 	t, err := t.Parse(getSecretTmpl)
 	if err != nil {
@@ -93,7 +96,7 @@ func PutSecretWeb(w http.ResponseWriter, r *http.Request) {
 	if insertComplete == false {
 		log.Println("bad insert using ciphertext" + "," + expireDate + "," + numViews)
 	}
-	URLString := "https://" + r.Host + "/getsecret?token=" + token
+	URLString := "https://" + r.Host + altpath +"/getsecret?token=" + token
 	type urldict struct {
 		URL     string
 		EXPDATE string
