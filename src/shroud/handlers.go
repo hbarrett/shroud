@@ -11,6 +11,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -39,9 +40,21 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 		DELDATE string
 		DELVIEWS string
 	}
-	params := &secretdict{PASS: decodedsecret, DELDATE: deldate, DELVIEWS: delviews}
+        delviewsint, err := strconv.Atoi(delviews)
+	logErr(err)
+
+	if delviewsint > 1{
+	decViews(token)
+	}else if delviewsint==1{
+	delViews(token)
+	}
+	if delviewsint != 0 {
+	delviewsint--
+	}
+	delviewsStr := strconv.Itoa(delviewsint)
+	params := &secretdict{PASS: decodedsecret, DELDATE: deldate, DELVIEWS: delviewsStr}
 	t := template.New("Secret HTML")
-	t, err := t.Parse(SecretHTML)
+	t, err = t.Parse(SecretHTML)
 	if err != nil {
 		fmt.Println("error parsing SecretURL")
 		fmt.Println(err)
@@ -65,7 +78,6 @@ func PutSecretWeb(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-//	fmt.Printf(ciphertext)
 
 	insertComplete := PutSecret(ciphertext, token, expireDate, numViews)
 	if insertComplete == false {
@@ -146,8 +158,19 @@ func PutSecret(encryptedSecret string, token string, expireDate string, numViews
 
 func GetSecret(token string, key []byte) (secret2, date, views string) {
 	var secret string
+	var count int
+	countstatement := "SELECT COUNT(*) from secrets where token ='" + token + "';"
+	rows, err := db.Query(countstatement)
+ 	logErr(err)
+        for rows.Next() {
+        err:= rows.Scan(&count)
+        logErr(err)
+	}
+	if count > 0 {
 	selectstatement := "SELECT secret, date, views from secrets where token ='" + token + "';"
+
 	foundsecret, err := db.Query(selectstatement)
+
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -163,7 +186,11 @@ func GetSecret(token string, key []byte) (secret2, date, views string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	}else{
+	secret2 = ""
+	date = "0000-00-00"
+	views = "0"
+	}
 	return
 }
 
@@ -207,3 +234,30 @@ func decryptstring(key []byte, ciphertext string) (string, error) {
 	return fmt.Sprintf("%s", data), nil
 
 }
+
+
+func decViews(token string) {
+
+        stmt, err := db.Prepare("UPDATE secrets SET views = views -1 WHERE token=? and views > 0")
+        logErr(err)
+        result, err := stmt.Exec(token)
+        logErr(err)
+        affect, err := result.RowsAffected()
+        logErr(err)
+        log.Println(affect)
+
+}
+
+
+func delViews(token string) {
+
+        stmt, err := db.Prepare("DELETE FROM secrets WHERE token=?")
+        logErr(err)
+        result, err := stmt.Exec(token)
+        logErr(err)
+        affect, err := result.RowsAffected()
+        logErr(err)
+        log.Println(affect)
+
+}
+
