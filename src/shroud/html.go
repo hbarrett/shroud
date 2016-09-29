@@ -14,8 +14,7 @@ const getSecretTmpl string =`<!DOCTYPE html>
         	width:16px;
             }
 
-            	.form_description
-            {
+            .form_description{
         	border-bottom:1px dotted #ccc;
         	clear:both;
         	display:inline-block;
@@ -41,7 +40,7 @@ const getSecretTmpl string =`<!DOCTYPE html>
         	margin:0 0 12px;
 	    }
             body{
-                background-color:#336699
+                background-color:{{.BACKGROUND}};
             }
             html,
             body{
@@ -62,20 +61,26 @@ const getSecretTmpl string =`<!DOCTYPE html>
             }
             #form_container
             {
-                background:#fff;
+                background:{{.FORMBACKGROUND}};
                 margin:0 auto;
                 text-align:left;
                 width:640px;
             }
             h1
             {
-                background-color:#6699CC;
+                background-color:{{.FOREGROUND}};
                 margin:10;
                 min-height:0;
                 padding:0;
                 text-decoration:none;
                 text-indent:-8000px;
-            }</style>
+	   {
+	   img.loading{
+  		position: absolute;
+  		left: 50%;
+  		margin-left: -(half ot the image width)px
+	   }
+	</style>
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"></link>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -88,6 +93,7 @@ const getSecretTmpl string =`<!DOCTYPE html>
     </head>
     <body>
         <div id="form_container">
+
             <h1>
                 <a>Create a new password to share.</a>
             </h1>
@@ -148,7 +154,7 @@ const SecretURL string =`<!DOCTYPE html>
     <head>
         <style>
             body{
-                background-color:#336699
+                background-color:{{.BACKGROUND}};
             }
             html,
             body{
@@ -169,14 +175,14 @@ const SecretURL string =`<!DOCTYPE html>
             }
             #form_container
             {
-                background:#fff;
+                background:{{.FORMBACKGROUND}};
                 margin:0 auto;
                 text-align:left;
                 width:1240px;
             }
             h1
             {
-                background-color:#6699CC;
+                background-color:{{.FOREGROUND}};
                 margin:10;
                 min-height:0;
                 padding:0;
@@ -212,7 +218,7 @@ const SecretHTML string =`<!DOCTYPE html>
     <head>
         <style>
             body{
-                background-color:#336699
+                background-color:{{.BACKGROUND}};
             }
             html,
             body{
@@ -233,14 +239,14 @@ const SecretHTML string =`<!DOCTYPE html>
             }
             #form_container
             {
-                background:#fff;
+                background:{{.FORMBACKGROUND}};
                 margin:0 auto;
                 text-align:left;
                 width:740px;
             }
             h1
             {
-                background-color:#6699CC;
+                background-color:{{.FOREGROUND}};
                 margin:10;
                 min-height:0;
                 padding:0;
@@ -254,7 +260,7 @@ const SecretHTML string =`<!DOCTYPE html>
             <div class="form_description">
             <h2>Your password is "<span style="background-color: #99ccff;">{{.PASS}}</span>"</h2>
             <h4>This password will be removed after {{.DELVIEWS}} more views or midnight on
-                {{.DELDATE}}, wichever comes first, so please save it in a safe place.</h4>
+                {{.DELDATE}}, whichever comes first, so please save it in a safe place.</h4>
             <p></p>
         </div>
     </body>

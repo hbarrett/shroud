@@ -15,13 +15,20 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	placeholder := `Placeholder{}`
+	//params := `Placeholder{}`
+        type secretdict struct {
+                BACKGROUND string
+                FOREGROUND string
+		FORMBACKGROUND string
+        }
+        params := &secretdict{BACKGROUND: background, FOREGROUND: foreground, FORMBACKGROUND: formbackground}
+
 	t := template.New("test")
 	t, err := t.Parse(getSecretTmpl)
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = t.Execute(w, placeholder)
+	err = t.Execute(w, params)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -39,6 +46,9 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 		PASS string
 		DELDATE string
 		DELVIEWS string
+		BACKGROUND string
+		FOREGROUND string
+		FORMBACKGROUND string
 	}
         delviewsint, err := strconv.Atoi(delviews)
 	logErr(err)
@@ -52,7 +62,7 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 	delviewsint--
 	}
 	delviewsStr := strconv.Itoa(delviewsint)
-	params := &secretdict{PASS: decodedsecret, DELDATE: deldate, DELVIEWS: delviewsStr}
+	params := &secretdict{PASS: decodedsecret, DELDATE: deldate, DELVIEWS: delviewsStr, BACKGROUND: background, FOREGROUND: foreground, FORMBACKGROUND: formbackground}
 	t := template.New("Secret HTML")
 	t, err = t.Parse(SecretHTML)
 	if err != nil {
@@ -88,8 +98,11 @@ func PutSecretWeb(w http.ResponseWriter, r *http.Request) {
 		URL     string
 		EXPDATE string
 		VIEWS   string
+                BACKGROUND string
+                FOREGROUND string
+		FORMBACKGROUND string
 	}
-	params := &urldict{URL: URLString, EXPDATE: expireDate, VIEWS: numViews}
+	params := &urldict{URL: URLString, EXPDATE: expireDate, VIEWS: numViews, BACKGROUND: background, FOREGROUND: foreground, FORMBACKGROUND: formbackground}
 	t := template.New("Secret URL")
 	t, err = t.Parse(SecretURL)
 

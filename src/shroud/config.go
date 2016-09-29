@@ -18,6 +18,9 @@ type Config struct {
 	DBPassword string
 	DBName     string
 	Key	   string
+	Foreground string
+	Background string
+	FormBackground string
 }
 
 // Reads info from config file
