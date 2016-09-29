@@ -9,7 +9,6 @@ import (
 
 // Info from config file
 type Config struct {
-	Ticker     int
 	LogDir     string
 	IP         string
 	Port       string
