@@ -45,6 +45,26 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 	key := []byte(keyStr)
 	token := r.FormValue("token")
 	decodedsecret, deldate, delviews := GetSecret(token, key)
+	if decodedsecret==""{
+        nf := template.New("Not Found")
+        nf, err := nf.Parse(NotFoundHTML)
+        if err != nil {
+                fmt.Println("error parsing NotFoundURL")
+                fmt.Println(err)
+        }
+        type nfdict struct {
+                TOKEN string
+                BACKGROUND string
+                FOREGROUND string
+                FORMBACKGROUND string
+        }
+	nfparams := &nfdict{TOKEN: token, BACKGROUND: background, FOREGROUND: foreground, FORMBACKGROUND: formbackground}
+        err = nf.Execute(w, nfparams)
+        if err != nil {
+                fmt.Println("error with Not Found execute")
+        }
+
+	}else{
 	type secretdict struct {
 		PASS string
 		DELDATE string
@@ -75,6 +95,7 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 	err = t.Execute(w, params)
 	if err != nil {
 		fmt.Println("error with execute")
+	}
 	}
 }
 
