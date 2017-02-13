@@ -99,6 +99,11 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func RemoveSecretWeb(w http.ResponseWriter, r *http.Request) {
+	token := r.FormValue("token")
+	fmt.Println(token)
+}
+
 func PutSecretWeb(w http.ResponseWriter, r *http.Request) {
 	key := []byte(keyStr)
 	expireDate := r.FormValue("date")

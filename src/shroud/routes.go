@@ -53,6 +53,12 @@ var routes = Routes{
                 "/getsecret",
                 GetSecretWeb,
         },
+		Route{
+		"RemoveSecret",
+		"DELETE",
+		"/rmsecret",
+		RemoveSecretWeb,
+	},
 
 }
 
