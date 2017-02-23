@@ -24,7 +24,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
         }
         path := altpath + "/putsecret"
 
-//	path :=  "/putsecret"
         params := &secretdict{BACKGROUND: background, FOREGROUND: foreground, FORMBACKGROUND: formbackground, PATH: path}
 	t := template.New("test")
 	t, err := t.Parse(getSecretTmpl)
@@ -77,13 +76,28 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 	logErr(err)
 
 	if delviewsint > 1{
-	decViews(token)
+	decViews(token[:8])
 	}else if delviewsint==1{
-	delViews(token)
+	delViews(token[:8])
 	}
 	if delviewsint != 0 {
 	delviewsint--
 	}
+	if delviewsint == 0 {
+        params := &secretdict{PASS: decodedsecret}
+        t := template.New("Last Secret HTML")
+        t, err = t.Parse(LastSecretHTML)
+        if err != nil {
+                fmt.Println("error parsing SecretURL")
+                fmt.Println(err)
+        }
+        err = t.Execute(w,params)
+        if err != nil {
+                fmt.Println("error with execute")
+        }
+
+	}else{
+
 	delviewsStr := strconv.Itoa(delviewsint)
 	params := &secretdict{PASS: decodedsecret, DELDATE: deldate, DELVIEWS: delviewsStr, BACKGROUND: background, FOREGROUND: foreground, FORMBACKGROUND: formbackground}
 	t := template.New("Secret HTML")
@@ -95,6 +109,7 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 	err = t.Execute(w, params)
 	if err != nil {
 		fmt.Println("error with execute")
+	}
 	}
 	}
 }

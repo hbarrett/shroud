@@ -16,7 +16,6 @@ var CODENAME string
 
 //create a DB handle
 var db *sql.DB
-var keyStr string
 var background string
 var foreground string
 var formbackground string
@@ -24,9 +23,7 @@ var altpath string
 func main() {
 	VERSION = "0.0"
 	CODENAME = "peek"
-	
 	var configf = ReadConfig() //this is in config.go
-	keyStr = configf.Key
 	background = configf.Background
 	foreground = configf.Foreground
 	formbackground = configf.FormBackground
