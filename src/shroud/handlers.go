@@ -24,7 +24,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
         }
         path := altpath + "/putsecret"
 
-//	path :=  "/putsecret"
         params := &secretdict{BACKGROUND: background, FOREGROUND: foreground, FORMBACKGROUND: formbackground, PATH: path}
 	t := template.New("test")
 	t, err := t.Parse(getSecretTmpl)
@@ -42,8 +41,8 @@ func Version(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
-	key := []byte(keyStr)
 	token := r.FormValue("token")
+        key := []byte(token)
 	decodedsecret, deldate, delviews := GetSecret(token, key)
 	if decodedsecret==""{
         nf := template.New("Not Found")
@@ -77,13 +76,28 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 	logErr(err)
 
 	if delviewsint > 1{
-	decViews(token)
+	decViews(token[:8])
 	}else if delviewsint==1{
-	delViews(token)
+	delViews(token[:8])
 	}
 	if delviewsint != 0 {
 	delviewsint--
 	}
+	if delviewsint == 0 {
+        params := &secretdict{PASS: decodedsecret}
+        t := template.New("Last Secret HTML")
+        t, err = t.Parse(LastSecretHTML)
+        if err != nil {
+                fmt.Println("error parsing SecretURL")
+                fmt.Println(err)
+        }
+        err = t.Execute(w,params)
+        if err != nil {
+                fmt.Println("error with execute")
+        }
+
+	}else{
+
 	delviewsStr := strconv.Itoa(delviewsint)
 	params := &secretdict{PASS: decodedsecret, DELDATE: deldate, DELVIEWS: delviewsStr, BACKGROUND: background, FOREGROUND: foreground, FORMBACKGROUND: formbackground}
 	t := template.New("Secret HTML")
@@ -97,6 +111,7 @@ func GetSecretWeb(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("error with execute")
 	}
 	}
+	}
 }
 
 func RemoveSecretWeb(w http.ResponseWriter, r *http.Request) {
@@ -105,11 +120,11 @@ func RemoveSecretWeb(w http.ResponseWriter, r *http.Request) {
 }
 
 func PutSecretWeb(w http.ResponseWriter, r *http.Request) {
-	key := []byte(keyStr)
 	expireDate := r.FormValue("date")
 	numViews := r.FormValue("views")
 	secret := r.FormValue("secret")
-	token, err := makeRandomString(40)
+	token, err := makeRandomString(16)
+        key := []byte(token)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -185,7 +200,7 @@ func GenRandomBytes(n int) ([]byte, error) {
 }
 
 func PutSecret(encryptedSecret string, token string, expireDate string, numViews string) bool {
-	values := "'" + encryptedSecret + "','" + token + "','" + expireDate + "','" + numViews + "'"
+	values := "'" + encryptedSecret + "','" + token[:8] + "','" + expireDate + "','" + numViews + "'"
 	insert := "INSERT INTO secrets (secret, token, date, views) VALUES(" + values + ");"
 	var sucess bool
 	_, err := db.Query(insert)
@@ -201,7 +216,7 @@ func PutSecret(encryptedSecret string, token string, expireDate string, numViews
 func GetSecret(token string, key []byte) (secret2, date, views string) {
 	var secret string
 	var count int
-	countstatement := "SELECT COUNT(*) from secrets where token ='" + token + "';"
+	countstatement := "SELECT COUNT(*) from secrets where token ='" + token[:8] + "';"
 	rows, err := db.Query(countstatement)
  	logErr(err)
         for rows.Next() {
@@ -209,7 +224,7 @@ func GetSecret(token string, key []byte) (secret2, date, views string) {
         logErr(err)
 	}
 	if count > 0 {
-	selectstatement := "SELECT secret, date, views from secrets where token ='" + token + "';"
+	selectstatement := "SELECT secret, date, views from secrets where token ='" + token[:8] + "';"
 
 	foundsecret, err := db.Query(selectstatement)
 
