@@ -2,100 +2,254 @@ package main
 
 const getSecretTmpl string =`<!DOCTYPE html>
 <html>
-<head>
-<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet"> 
-<style>
-.basicbox {
-    margin: 0 auto;
-    padding: 10px 10px;
-    width: 700px;
-    height: 280px;
-    text-align: center;
-    font-family: 'Gloria Hallelujah', Arial;
-    font-size: 1.4em;
-    color: white;
-    border:1px #E8Ds47 solid;
-    -moz-box-shadow:0px 0px 6px 1px #070707;
-    -webkit-box-shadow:0px 0px 6px 1px #070707;
-    box-shadow:0px 0px 6px 1px #070707;
-background:#6594b6;
-}
-.pw {
-font-family:  Arial;
-}
-.red {
-color: red;
-}
-.basicbox ul {
-    margin: 0px;
-text-align: left;
-}
-.basicbox p {
-    text-align: center;
-}
-</style>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"></link>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-        <script>
-            var tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            $.datepicker.setDefaults({ dateFormat: 'yy-mm-dd', minDate: +2, maxDate: "+1W" });
-            $(document).ready(function() { $("#datepicker").datepicker();$("#datepicker").datepicker("setDate", new Date());});
-        </script>
-</head>
-<body bgcolor=#5388ae>
-</br>
-</br>
-</br>
-</br>
-<div class="basicbox">
-    <p>
-    <strong>Create a new password to share:</strong>
-    </p>
 
-            <form id="form_1158694" class="appnitro" method="post" action="{{.PATH}}">
-                <div class="form_description">
+<head>
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+    <style>
+        .basicbox {
+            margin: 0 auto;
+            padding: 10px 10px;
+            width: 700px;
+            
+            height: 345px;
+            
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+           
+            font-size: 1.4em;
+            color: white;
+            border: 1px #E8Ds47 solid;
+            -moz-box-shadow: 0px 0px 6px 1px #070707;
+            -webkit-box-shadow: 0px 0px 6px 1px #070707;
+            box-shadow: 0px 0px 6px 1px #070707;
+            background: #6594b6;
+            border-radius: 70px;
+        }
+
+        .pw {
+            font-size: 0.6em;
+            padding-left: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .basicbox ul {
+            margin: 0px;
+            text-align: left;
+        }
+
+        .basicbox p {
+            text-align: center;
+        }
+
+        #saveForm {
+  border-style: hidden;
+  border-radius: 6px;
+  padding-left: 14px;
+  margin-top: 26px;
+  font-family: 'Poppins', sans-serif;
+  padding-right: 14px;
+  font-size: 17px;
+  background-color: #89abc4;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  color: #374046;
+  cursor: pointer;
+}
+#secret {
+    width: 78.7%;
+border-style: hidden;
+border-radius: 4px;
+height: 21px;
+font-family: 'Poppins', sans-serif;
+
+font-weight: bold;
+}
+
+#datepicker {
+    width: 32%;
+border-style: hidden;
+border-radius: 4px;
+height: 21px;
+font-family: 'Poppins', sans-serif;
+text-align: center;
+cursor: pointer;
+font-weight: bold;
+}
+#views {
+width: 18.6%;
+border-style: hidden;
+border-radius: 4px;
+height: 24px;
+font-family: 'Poppins', sans-serif;
+background-color: white;
+cursor: pointer;
+font-weight: bold;
+}
+    </style>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    </link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script>
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        $.datepicker.setDefaults({ dateFormat: 'yy-mm-dd', minDate: +2, maxDate: "+1W" });
+        $(document).ready(function () { $("#datepicker").datepicker(); $("#datepicker").datepicker("setDate", new Date()); });
+    </script>
+</head>
+
+<body bgcolor=#5388ae>
+    </br>
+    </br>
+    </br>
+    </br>
+    <div class="basicbox">
+        <div>
+            <svg
+   width="14.543306mm"
+   height="18.830524mm"
+   viewBox="0 0 14.543306 18.830524"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (1:1.1+202109281944+c3084ef5ed)"
+   sodipodi:docname="shroud.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:snap-global="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="2.1266375"
+     inkscape:cx="88.637578"
+     inkscape:cy="102.74435"
+     inkscape:window-width="1872"
+     inkscape:window-height="1016"
+     inkscape:window-x="48"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-158.297,-25.937328)">
+    <path
+       sodipodi:type="star"
+       style="fill:#3e7699;fill-opacity:1;stroke:none;stroke-width:2.64567;stroke-opacity:1"
+       id="path1334"
+       inkscape:flatsided="true"
+       sodipodi:sides="8"
+       sodipodi:cx="599.66028"
+       sodipodi:cy="207.00908"
+       sodipodi:r1="79.030869"
+       sodipodi:r2="73.015007"
+       sodipodi:arg1="0.78539816"
+       sodipodi:arg2="1.1780972"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       transform="matrix(0.09201029,0,0,0.11913398,110.39374,10.690774)"
+       inkscape:transform-center-x="2.1413356e-06"
+       d="m 655.54354,262.89234 -55.88326,23.14761 -55.88326,-23.14761 -23.14761,-55.88326 23.14761,-55.88326 55.88326,-23.14761 55.88326,23.14761 23.14761,55.88326 z" />
+    <path
+       sodipodi:type="star"
+       style="fill:#2a4355;fill-opacity:1;stroke:none;stroke-width:2.64567;stroke-opacity:1"
+       id="path1334-3"
+       inkscape:flatsided="true"
+       sodipodi:sides="8"
+       sodipodi:cx="599.66028"
+       sodipodi:cy="207.00908"
+       sodipodi:r1="79.030869"
+       sodipodi:r2="73.015007"
+       sodipodi:arg1="0.78539816"
+       sodipodi:arg2="1.1780972"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       transform="matrix(0.0728456,0,0,0.09431974,121.88604,17.119232)"
+       inkscape:transform-center-x="2.7588708e-06"
+       d="m 655.54354,262.89234 -55.88326,23.14761 -55.88326,-23.14761 -23.14761,-55.88326 23.14761,-55.88326 55.88326,-23.14761 55.88326,23.14761 23.14761,55.88326 z" />
+    <path
+       style="fill:#6594b6;fill-opacity:1;stroke:none;stroke-width:0.0190039px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 166.14773,36.08465 4.28996,-0.897591 -2.87234,1.773939 z"
+       id="path857-2" />
+    <path
+       style="fill:#6594b6;fill-opacity:1;stroke:none;stroke-width:0.0190039px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 164.98958,36.08465 -4.28996,-0.897591 2.87234,1.773939 z"
+       id="path857-4-8" />
+  </g>
+</svg>
+        </div>
+        <p>
+            <strong>Create a new secret to share:</strong>
+        </p>
+
+        <form id="form_1158694" class="appnitro" method="post" action="{{.PATH}}">
+            <div class="form_description">
+            </div>
+            <ul>
+                <div>
+                    <label class="description" for="secret">Secret</label>
+                    <input id="secret" name="secret" class="element text medium" type="text" maxlength="255" value="" />
                 </div>
-                <ul> <div>
-                        <label class="description" for="secret">Password</label>
-                            <input id="secret" name="secret" class="element text medium" type="text"
-                                maxlength="255" value="" />
-                        </div>
-                        <div>
-                        <label class="description" for="views">Number of views before secret is
-                            removed:</label>
-                            <select class="element select medium" id="views" name="views">
-                                <!--<option value=5 selected="selected"></option>-->
-                                <option value="10">10</option>
-                                <option value="9">9</option>
-                                <option value="8">8</option>
-                                <option value="7">7</option>
-                                <option value="6">6</option>
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select>
-                        </div>
-                        <div>
-                        <label class="description" for="element_2">Date when secret will be removed:</label>
-                        <input id="datepicker" name="date" />
-                        </div>
-		</ul>
-                <input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
-            </form>
-</div>
-<script>
-var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_)(*&^%$#@!';
-var stringLength = Math.floor(Math.random() * 16) + 8 ;
-var randomString = Array.apply(null, new Array(stringLength)).map(function () {
-    return possible[Math.floor(Math.random() * possible.length)];
-}).join('');
-document.getElementById('secret').value = randomString;
-</script>
+                <div>
+                    <label class="description" for="views">Number of views before secret is
+                        removed:</label>
+                    <select class="element select medium" id="views" name="views">
+                        <!--<option value=5 selected="selected"></option>-->
+                        <option value="10">10</option>
+                        <option value="9">9</option>
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="description" for="element_2">Date when secret will be removed:</label>
+                    <input id="datepicker" name="date" />
+                </div>
+            </ul>
+            <input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+        </form>
+    </div>
+    <script>
+        var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_)(*&^%$#@!';
+        var stringLength = Math.floor(Math.random() * 16) + 8;
+        var randomString = Array.apply(null, new Array(stringLength)).map(function () {
+            return possible[Math.floor(Math.random() * possible.length)];
+        }).join('');
+        document.getElementById('secret').value = randomString;
+    </script>
 </body>
+
 </html>`
 
 
@@ -107,7 +261,10 @@ document.getElementById('secret').value = randomString;
 const SecretURL string = `<!DOCTYPE html>
 <html>
     <head>
-<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
         <style>
 body{
                 background-color:#5388ae;
@@ -117,11 +274,11 @@ body{
     /* General */
     margin: 0 auto;
     padding: 10px 10px;
-    width: 900px;
-    height: 280px;
+    width: 700px;
+    height: 345px;
     text-align: center;
     /* Font */
-    font-family: 'Gloria Hallelujah', Arial;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.4em;
     color: white;
     /* Border */
@@ -131,11 +288,13 @@ body{
     -webkit-box-shadow:0px 0px 6px 1px #070707;
     box-shadow:0px 0px 6px 1px #070707;
     background:#6594b6;
+    border-radius: 70px;
 }
  
 .pw {
-font-family:  Arial;
-font-size: 0.6em;
+    font-size: 0.6em;
+    padding-left: 15px;
+    font-family: 'Poppins', sans-serif;
 }
 .basicbox ul {
     margin: 0px;
@@ -150,9 +309,17 @@ text-align: left;
     </style>
     </head>
     <body>
+    <br>
+    <br>
+    <br>
+    <br>
 	<div class="basicbox">
 		<h2>Share this secret info.</h2>
-		<p>URL:<a href="{{.URL}}" class= "pw">{{.URL}}</a></br>This secret expires on: {{.EXPDATE}}</br>Maxium number of views: {{.VIEWS}}</p>
+		<p>URL:<a href="{{.URL}}" class= "pw">{{.URL}}</a></br>This secret expires on: {{.EXPDATE}}</br>Maxium number of views: {{.VIEWS}}
+        </br>
+        <div style="font-size: small;">Example: Send this link in an e-mail to the person you wish to share the secret with.</div>
+        </p>
+      
         </div>
     </body>
 </html>`
@@ -162,6 +329,10 @@ text-align: left;
 const SecretURLOld string =`<!DOCTYPE html>
 <html>
     <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
         <style>
             body{
                 background-color:{{.BACKGROUND}};
@@ -225,7 +396,9 @@ const SecretURLOld string =`<!DOCTYPE html>
 const NotFoundHTML string =`<!DOCTYPE html>
 <html>
 <head>
-<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 <style>
 .backgroundBlue {
 background:#5388ae;
@@ -236,7 +409,7 @@ background:#5388ae;
     width: 500px;
     height: 300px;
     color: #575757;
-    font-family: 'Gloria Hallelujah', Arial;
+    font-family: 'Poppins', sans-serif;
     font-size: 2em;
     border:4px #E8Ds47 solid;
     -moz-box-shadow:0px 0px 30px 5px #070707;
@@ -250,14 +423,27 @@ background:#5388ae;
     padding-left: 90px ;
 }
 .pw {
-font-family:  Arial;
+    font-size: 0.6em;
+    padding-left: 15px;
+    font-family: 'Poppins', sans-serif;
 }
 .red {
 color: red;
 }
 .paper p{
-font-size: .6em;
+    font-size: 0.53em;
+    padding-top: 5px;
+    padding-left: 11px;
 }
+#token-not-found {
+    font-size: 15pt;
+    font-weight: bold;
+    padding-left: 10px;
+  }
+  #still-valid {
+    font-size: 12pt;
+    padding-left: 11px;
+  }
 </style>
 </head>
 <body bgcolor=#5388ae>
@@ -267,9 +453,9 @@ font-size: .6em;
 </br>
 </br>
 <div class="paper">
-    <p><strong>Token Not Found</strong></br></p>
-    <p>Although this link no longer works, the password should still work.</p>
-    <p> Did you save it in a safe place?</p>
+    <div id="token-not-found">Token Not Found</div>
+    <div id="still-valid" >Although this link no longer works, the secret may still valid.</div>
+    
 </br>
 </br>
 </br>
@@ -281,7 +467,9 @@ font-size: .6em;
 const SecretHTML string =`<!DOCTYPE html>
 <html>
 <head>
-<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet"> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 <style>
 
 .paper {
@@ -292,7 +480,7 @@ const SecretHTML string =`<!DOCTYPE html>
     height: 300px;
     color: #575757;
     /* Font */
-    font-family: 'Gloria Hallelujah', Arial;
+    font-family: 'Poppins', sans-serif;
     font-size: 2em;
     /* Border */
     border:1px #E8Ds47 solid;
@@ -308,16 +496,22 @@ background-size: 530px 300px;
 padding-left: 90px ;
 }
 
+#copyTarget {
+    width: 89%;
+    font-family: 'Poppins', sans-serif;
+    font-size: large;
+  
+  }
 
 .sticky {
     /* General */
     margin: 0 auto;
     padding: 10px 10px;
-    width: 400px;
-    height: 280px;
+    width: 700px;
+    height: 345px;
  text-align: center;
     /* Font */
-    font-family: 'Gloria Hallelujah', Arial;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.4em;
     color: white;
     /* Border */
@@ -330,13 +524,15 @@ padding-left: 90px ;
   -o-transform:rotate(-2deg);
   -moz-transform:rotate(-2deg);*/
 background:#6594b6;
-
-  
+border-radius: 70px;
+border-radius: 70px;
 
 }
  
 .pw {
-font-family:  Arial;
+    font-size: 0.6em;
+    padding-left: 15px;
+    font-family: 'Poppins', sans-serif;
 
 }
 
@@ -354,10 +550,25 @@ color: red;
 }
 
 .paper p{
-font-size: .6em;
+    font-size: 0.53em;
+    padding-top: 5px;
+    padding-left: 11px;
 
 }
-
+#copyButton {
+    border-style: hidden;
+    border-radius: 6px;
+    padding-left: 14px;
+    margin-top: 26px;
+    font-family: 'Poppins', sans-serif;
+    padding-right: 14px;
+    font-size: 17px;
+    background-color: #89abc4;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: #374046;
+    cursor: pointer;
+  }
 </style>
 </head>
 
@@ -370,8 +581,95 @@ font-size: .6em;
 </br>
 </br>
 <div class="sticky">
+<svg
+   width="14.543306mm"
+   height="18.830524mm"
+   viewBox="0 0 14.543306 18.830524"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (1:1.1+202109281944+c3084ef5ed)"
+   sodipodi:docname="shroud.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:snap-global="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="2.1266375"
+     inkscape:cx="88.637578"
+     inkscape:cy="102.74435"
+     inkscape:window-width="1872"
+     inkscape:window-height="1016"
+     inkscape:window-x="48"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-158.297,-25.937328)">
+    <path
+       sodipodi:type="star"
+       style="fill:#3e7699;fill-opacity:1;stroke:none;stroke-width:2.64567;stroke-opacity:1"
+       id="path1334"
+       inkscape:flatsided="true"
+       sodipodi:sides="8"
+       sodipodi:cx="599.66028"
+       sodipodi:cy="207.00908"
+       sodipodi:r1="79.030869"
+       sodipodi:r2="73.015007"
+       sodipodi:arg1="0.78539816"
+       sodipodi:arg2="1.1780972"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       transform="matrix(0.09201029,0,0,0.11913398,110.39374,10.690774)"
+       inkscape:transform-center-x="2.1413356e-06"
+       d="m 655.54354,262.89234 -55.88326,23.14761 -55.88326,-23.14761 -23.14761,-55.88326 23.14761,-55.88326 55.88326,-23.14761 55.88326,23.14761 23.14761,55.88326 z" />
+    <path
+       sodipodi:type="star"
+       style="fill:#2a4355;fill-opacity:1;stroke:none;stroke-width:2.64567;stroke-opacity:1"
+       id="path1334-3"
+       inkscape:flatsided="true"
+       sodipodi:sides="8"
+       sodipodi:cx="599.66028"
+       sodipodi:cy="207.00908"
+       sodipodi:r1="79.030869"
+       sodipodi:r2="73.015007"
+       sodipodi:arg1="0.78539816"
+       sodipodi:arg2="1.1780972"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       transform="matrix(0.0728456,0,0,0.09431974,121.88604,17.119232)"
+       inkscape:transform-center-x="2.7588708e-06"
+       d="m 655.54354,262.89234 -55.88326,23.14761 -55.88326,-23.14761 -23.14761,-55.88326 23.14761,-55.88326 55.88326,-23.14761 55.88326,23.14761 23.14761,55.88326 z" />
+    <path
+       style="fill:#6594b6;fill-opacity:1;stroke:none;stroke-width:0.0190039px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 166.14773,36.08465 4.28996,-0.897591 -2.87234,1.773939 z"
+       id="path857-2" />
+    <path
+       style="fill:#6594b6;fill-opacity:1;stroke:none;stroke-width:0.0190039px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 164.98958,36.08465 -4.28996,-0.897591 2.87234,1.773939 z"
+       id="path857-4-8" />
+  </g>
+</svg>
     <p>
-    <strong>Your password is:</strong>
+    <strong>Your secret is:</strong>
     </p>
 
 
@@ -393,7 +691,7 @@ font-size: .6em;
 <div class="paper">
     <p>
     <strong>IMPORTANT!</strong></br>
-    Save this password! This URL will expire on {{.DELDATE}} or {{.DELVIEWS}} more views.  (Whichever comes first.) 
+    Save this secret now! This URL will expire on {{.DELDATE}} or {{.DELVIEWS}} more views.  (Whichever comes first.) 
     </p>
 
 
@@ -497,7 +795,9 @@ function copyToClipboard(elem) {
 const LastSecretHTML string =`<!DOCTYPE html>
 <html>
 <head>
-<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet"> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 <style>
 
 .paper {
@@ -508,7 +808,7 @@ const LastSecretHTML string =`<!DOCTYPE html>
     height: 300px;
     color: #575757;
     /* Font */
-    font-family: 'Gloria Hallelujah', Arial;
+    font-family: 'Poppins', sans-serif;
     font-size: 2em;
     /* Border */
     border:1px #E8Ds47 solid;
@@ -524,16 +824,21 @@ background-size: 530px 300px;
 padding-left: 90px ;
 }
 
+#copyTarget {
+    width: 89%;
+    font-family: 'Poppins', sans-serif;
+    font-size: large;
+}
 
 .sticky {
     /* General */
     margin: 0 auto;
     padding: 10px 10px;
-    width: 400px;
+    width: 45%;
     height: 280px;
  text-align: center;
     /* Font */
-    font-family: 'Gloria Hallelujah', Arial;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.4em;
     color: white;
     /* Border */
@@ -546,13 +851,15 @@ padding-left: 90px ;
   -o-transform:rotate(-2deg);
   -moz-transform:rotate(-2deg);*/
 background:#6594b6;
-
+border-radius: 70px;
   
 
 }
  
 .pw {
-font-family:  Arial;
+    font-size: 0.6em;
+    padding-left: 15px;
+    font-family: 'Poppins', sans-serif;
 
 }
 
@@ -570,10 +877,27 @@ color: red;
 }
 
 .paper p{
-font-size: .6em;
+    font-size: 0.53em;
+    padding-top: 5px;
+    padding-left: 11px;
 
 }
 
+#copyButton {
+    border-style: solid;
+    border-radius: 8px;
+    padding-left: 14px;
+    margin-top: 26px;
+    font-family: 'Poppins', sans-serif;
+    padding-right: 14px;
+    font-size: 17px;
+    background-color: #89abc4;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: #374046;
+    cursor: pointer;
+    font-weight: bold;
+  }
 </style>
 </head>
 
@@ -586,11 +910,98 @@ font-size: .6em;
 </br>
 </br>
 <div class="sticky">
+<svg
+   width="14.543306mm"
+   height="18.830524mm"
+   viewBox="0 0 14.543306 18.830524"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (1:1.1+202109281944+c3084ef5ed)"
+   sodipodi:docname="shroud.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:snap-global="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="2.1266375"
+     inkscape:cx="88.637578"
+     inkscape:cy="102.74435"
+     inkscape:window-width="1872"
+     inkscape:window-height="1016"
+     inkscape:window-x="48"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-158.297,-25.937328)">
+    <path
+       sodipodi:type="star"
+       style="fill:#3e7699;fill-opacity:1;stroke:none;stroke-width:2.64567;stroke-opacity:1"
+       id="path1334"
+       inkscape:flatsided="true"
+       sodipodi:sides="8"
+       sodipodi:cx="599.66028"
+       sodipodi:cy="207.00908"
+       sodipodi:r1="79.030869"
+       sodipodi:r2="73.015007"
+       sodipodi:arg1="0.78539816"
+       sodipodi:arg2="1.1780972"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       transform="matrix(0.09201029,0,0,0.11913398,110.39374,10.690774)"
+       inkscape:transform-center-x="2.1413356e-06"
+       d="m 655.54354,262.89234 -55.88326,23.14761 -55.88326,-23.14761 -23.14761,-55.88326 23.14761,-55.88326 55.88326,-23.14761 55.88326,23.14761 23.14761,55.88326 z" />
+    <path
+       sodipodi:type="star"
+       style="fill:#2a4355;fill-opacity:1;stroke:none;stroke-width:2.64567;stroke-opacity:1"
+       id="path1334-3"
+       inkscape:flatsided="true"
+       sodipodi:sides="8"
+       sodipodi:cx="599.66028"
+       sodipodi:cy="207.00908"
+       sodipodi:r1="79.030869"
+       sodipodi:r2="73.015007"
+       sodipodi:arg1="0.78539816"
+       sodipodi:arg2="1.1780972"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       transform="matrix(0.0728456,0,0,0.09431974,121.88604,17.119232)"
+       inkscape:transform-center-x="2.7588708e-06"
+       d="m 655.54354,262.89234 -55.88326,23.14761 -55.88326,-23.14761 -23.14761,-55.88326 23.14761,-55.88326 55.88326,-23.14761 55.88326,23.14761 23.14761,55.88326 z" />
+    <path
+       style="fill:#6594b6;fill-opacity:1;stroke:none;stroke-width:0.0190039px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 166.14773,36.08465 4.28996,-0.897591 -2.87234,1.773939 z"
+       id="path857-2" />
+    <path
+       style="fill:#6594b6;fill-opacity:1;stroke:none;stroke-width:0.0190039px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 164.98958,36.08465 -4.28996,-0.897591 2.87234,1.773939 z"
+       id="path857-4-8" />
+  </g>
+</svg>
     <p>
-    <strong>Your password is:</strong>
+    <strong>Your secret is:</strong>
     </p>
 <div class="pw">
-        <p>{{.PASS}}</p>
+        <p style="font-family: 'Poppins', sans-serif;font-size: x-large;font-weight: bold;color: #2a4355;">{{.PASS}}</p>
 </div>
 
 </div>   
@@ -601,7 +1012,7 @@ font-size: .6em;
 <div class="paper">
     <p>
     <strong>IMPORTANT!</strong></br>
-<font color="red">This is your last chance to view this password!</br>Save it in a safe place!!</font>
+<font color="red">This is your last chance to view this secret!</br>Save it in a safe place!!</font>
     
     </p>
 
